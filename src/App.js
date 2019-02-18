@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 import './App.css';
 import { WeatherDetails, CityDetails } from './components';
-import Grid from '@material-ui/core/Button';
+
+import axios from 'axios';
 
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import NativeSelect from '@material-ui/core/Select';
 
+import { Grid, Row, Col } from 'react-flexbox-grid';
 
-// import styled from "styled-components";
 
 const KEY = "6c9dd76d581a4a77813152236191502";
 const BASE = "http://api.apixu.com/v1/forecast.json?key=";
@@ -88,47 +88,46 @@ class App extends Component {
 
     return (
 
-      <Grid container direction="row" spacing={16}
-        justify="center" alignItems="center" lg={'auto'}
-      >
-        <Grid item>
-          <FormControl >
-            <InputLabel htmlFor="city-native-simple">{this.state.country}</InputLabel>
-            <NativeSelect
-              native
-              value={this.state.city}
-              onChange={this.handleChangeCity('city')}
-              inputProps={{
-                name: 'city',
-                id: 'city-native-simple',
-              }}
-            >
-              <icon disabled value={this.state.city} >{this.state.city} </icon>
-              <option value={"Guangzhou"}>Guangzhou</option>
-              <option value={"Hongkong"}>Hongkong</option>
-              <option value={"Suva"}>Suva</option>
-              <option value={"Sydney"} >Sydney </option>
-              <option value={"Tokyo"}>Tokyo</option>
+      <Grid fluid>
+        <Row>
+          <Col sm={6} >
+            <FormControl >
+              <InputLabel htmlFor="city-native-simple">{this.state.country}</InputLabel>
+              <NativeSelect
+                native
+                value={this.state.city}
+                onChange={this.handleChangeCity('city')}
+                inputProps={{
+                  name: 'city',
+                  id: 'city-native-simple',
+                }}
+              >
+                <icon disabled value={this.state.city} >{this.state.city} </icon>
+                <option value={"Guangzhou"}>Guangzhou</option>
+                <option value={"Hongkong"}>Hongkong</option>
+                <option value={"Suva"}>Suva</option>
+                <option value={"Sydney"} >Sydney </option>
+                <option value={"Tokyo"}>Tokyo</option>
 
-            </NativeSelect>
-          </FormControl>
+              </NativeSelect>
+            </FormControl>
 
-
-          < CityDetails
-            name={this.state.city}
-            country={this.state.country}
-            condition={this.state.condition}
-            wind={this.state.wind}
-            humidity={this.state.humidity}
-            temperature={this.state.temperature}
-            temperatureFeelsLike={this.state.temperatureFeelsLike}
-          />
-
-        </Grid>
-        <Grid item>
-          <WeatherDetails forecastList={this.state.weatherForecast} />
-        </Grid>
+            < CityDetails
+              name={this.state.city}
+              country={this.state.country}
+              condition={this.state.condition}
+              wind={this.state.wind}
+              humidity={this.state.humidity}
+              temperature={this.state.temperature}
+              temperatureFeelsLike={this.state.temperatureFeelsLike}
+            />
+          </Col>
+          <Col sm={6} >
+            <WeatherDetails forecastList={this.state.weatherForecast} />
+          </Col>
+        </Row>
       </Grid >
+
 
     );
   }
